@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<title>Mobiz-Advanced-Natural-Disaster-Alarm-For-Indonesia</title>
+<link href="https://fonts.cdnfonts.com/css/vcr-eas" rel="stylesheet">
+<style>
+	* {
+    	font-family: 'VCR EAS', sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    } body {
+    	background: black; 
+        height: 100vh;
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        padding: 25px;
+    } img {
+    	width: 20vw;
+    }
+</style>
+
+  <center>
+    <div>
+      <img id="shakemap">
+    
+      <br><br>
+    
+      <span><span id="tanggal"></span> <span id="jam"></span></span>
+      
+      <br><br>
+      
+      <h2 id="wilayah"></h2><br>
+      <h3 id="potensi"></h3>
+      
+      <br>
+      
+      <span>Coordinate: <span id="coordinates"></span></span><br>
+      <span>Latitude: <span id="lintang"></span></span><br>
+      <span>Longitude: <span id="bujur"></span></span><br>
+      <span>Depth: <span id="kedalaman"></span></span><br>
+      <span>Magnitude: <span id="magnitude"></span></span><br><br>
+      <span>Affected areas: <span id="dirasakan"></span></span>
+    </div>
+  </center>
+
+<script>
+async function fetchQuakes() {
+	let fetchedData = await fetch('https://cuaca-gempa-rest-api.vercel.app/quake')
+    let data = await fetchedData.json()
+    
+    document.getElementById('wilayah').innerText = data.data.wilayah;
+    document.getElementById('potensi').innerText = data.data.potensi;
+    
+    document.getElementById('tanggal').innerText = data.data.tanggal;
+    document.getElementById('jam').innerText = data.data.jam;
+    
+    document.getElementById('coordinates').innerText = data.data.coordinates;
+    document.getElementById('lintang').innerText = data.data.lintang;
+    document.getElementById('bujur').innerText = data.data.bujur;
+    document.getElementById('kedalaman').innerText = data.data.kedalaman;
+    document.getElementById('magnitude').innerText = data.data.magnitude;
+    document.getElementById('dirasakan').innerText = data.data.dirasakan;
+    
+    document.getElementById('shakemap').src = data.data.shakemap;
+}
+fetchQuakes()
+</script>
+
+</body>
+</html>
